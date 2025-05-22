@@ -1,7 +1,8 @@
 # SnugWork
 
 ## TODO
-- [X] Deploy app to vercel
+
+- [x] Deploy app to vercel
 - [ ] Scaffold basic UI
 - [ ] Setup DB(Vercel Postgres & DrizzleORM)
 - [ ] Attach DB to UI
