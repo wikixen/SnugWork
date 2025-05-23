@@ -123,15 +123,15 @@ const SettingsDropdownItems = [
     key: 1,
     link: "/profile",
     icon: <User />,
-    itemTitle: "Profile"
+    itemTitle: "Profile",
   },
   {
     key: 2,
     link: "/settings",
     icon: <Settings />,
-    itemTitle: "Settings"
+    itemTitle: "Settings",
   },
-]
+];
 
 function SettingsDropdown() {
   return (
@@ -146,19 +146,17 @@ function SettingsDropdown() {
           My Account
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {
-          SettingsDropdownItems.map(item => (
-            <DropdownMenuItem key={item.key}>
-              <Link
-                href={item.link}
-                className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
-              >
-                {item.icon}
-                <span>{ item.itemTitle }</span>
-              </Link>
-            </DropdownMenuItem>
-          ))
-        }
+        {SettingsDropdownItems.map((item) => (
+          <DropdownMenuItem key={item.key}>
+            <Link
+              href={item.link}
+              className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
+            >
+              {item.icon}
+              <span>{item.itemTitle}</span>
+            </Link>
+          </DropdownMenuItem>
+        ))}
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <div className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20">
@@ -184,36 +182,32 @@ function MiniNav() {
           <DropdownMenuLabel className="font-semibold">
             Navigate To
           </DropdownMenuLabel>
-          {
-            NavMenu.map(navLink => (
-              <DropdownMenuItem key={navLink.key}>
-                <Link
-                  href=""
-                  className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
-                >
-                  {navLink.icon}
-                  <span>{navLink.tooltip}</span>
-                </Link>
-              </DropdownMenuItem>
-            ))
-          }
+          {NavMenu.map((navLink) => (
+            <DropdownMenuItem key={navLink.key}>
+              <Link
+                href=""
+                className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
+              >
+                {navLink.icon}
+                <span>{navLink.tooltip}</span>
+              </Link>
+            </DropdownMenuItem>
+          ))}
           <DropdownMenuSeparator />
           <DropdownMenuLabel className="font-semibold">
             My Account
           </DropdownMenuLabel>
-          {
-            SettingsDropdownItems.map(item => (
-              <DropdownMenuItem key={item.key}>
-                <Link
-                  href={item.link}
-                  className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
-                >
-                  {item.icon}
-                  <span>{item.itemTitle}</span>
-                </Link>
-              </DropdownMenuItem>
-            ))
-          }
+          {SettingsDropdownItems.map((item) => (
+            <DropdownMenuItem key={item.key}>
+              <Link
+                href={item.link}
+                className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
+              >
+                {item.icon}
+                <span>{item.itemTitle}</span>
+              </Link>
+            </DropdownMenuItem>
+          ))}
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <div className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20">
