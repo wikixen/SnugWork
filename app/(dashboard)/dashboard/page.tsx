@@ -95,7 +95,7 @@ function DashMiniCards() {
       title: "Response Rate",
       icon: <ActivityIcon />,
       total: 20,
-      change: 4,
+      change: .4,
     },
   ];
   return (
@@ -109,7 +109,7 @@ function DashMiniCards() {
           <div className="flex flex-col gap-1">
             <CardContent className="text-xl">{card.total}</CardContent>
             <CardFooter className="text-sm text-gray-400">
-              +{card.change} since last week
+              +{card.change > 1 ? card.change : `${card.change * 100}%`} since last week
             </CardFooter>
           </div>
         </Card>
