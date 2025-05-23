@@ -23,10 +23,10 @@ export default function Page() {
           Track your job applications and stay organized.
         </h2>
       </section>
-      <section className="grid grid-cols-2 grid-rows-2 gap-4">
+      <section className="grid gap-4 lg:grid-cols-4">
         <DashMiniCards />
       </section>
-      <section>
+      <section className="grid gap-4 lg:grid-cols-[1fr_.5fr]">
         <Card>
           <CardHeader>
             <CardTitle>Recent Applications</CardTitle>
@@ -37,6 +37,22 @@ export default function Page() {
           <CardContent>
           </CardContent>
         </Card>
+        <div className="grid gap-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Application Status</CardTitle>
+            </CardHeader>
+            <CardContent>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Upcoming Interviews</CardTitle>
+            </CardHeader>
+            <CardContent>
+            </CardContent>
+          </Card>
+        </div>
       </section>
     </section>
   );
