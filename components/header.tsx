@@ -77,38 +77,43 @@ function Search() {
   );
 }
 
-const NavMenu = [
+const NavMenuItems = [
   {
     key: 1,
+    link: "/dashboard",
     icon: <LayoutDashboard />,
-    tooltip: "Dashboard",
+    tip: "Dashboard",
   },
   {
     key: 2,
+    link: "/applications",
     icon: <ListIcon />,
-    tooltip: "Applications",
+    tip: "Applications",
   },
   {
     key: 3,
+    link: "/calendar",
     icon: <CalendarIcon />,
-    tooltip: "Calendar",
+    tip: "Calendar",
   },
 ];
 
 function NavBar() {
   return (
     <>
-      {NavMenu.map((navLink) => (
-        <TooltipProvider key={navLink.key}>
+      {NavMenuItems.map((item) => (
+        <TooltipProvider key={item.key}>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost">
-                {navLink.icon}
+              <Button variant="ghost" asChild>
+                <Link href={item.link}>
+                  {item.icon}
+                </Link>
               </Button>
             </TooltipTrigger>
             <TooltipContent>
               <p className="p-2 border-1 border-white/20 rounded-sm mt-1 bg-black">
-                {navLink.tooltip}
+                {item.tip}
               </p>
             </TooltipContent>
           </Tooltip>
@@ -123,13 +128,13 @@ const SettingsDropdownItems = [
     key: 1,
     link: "/profile",
     icon: <User />,
-    itemTitle: "Profile",
+    tip: "Profile",
   },
   {
     key: 2,
     link: "/settings",
     icon: <Settings />,
-    itemTitle: "Settings",
+    tip: "Settings",
   },
 ];
 
@@ -153,7 +158,7 @@ function SettingsDropdown() {
               className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
             >
               {item.icon}
-              <span>{item.itemTitle}</span>
+              <span>{item.tip}</span>
             </Link>
           </DropdownMenuItem>
         ))}
@@ -182,14 +187,14 @@ function MiniNav() {
           <DropdownMenuLabel className="font-semibold">
             Navigate To
           </DropdownMenuLabel>
-          {NavMenu.map((navLink) => (
-            <DropdownMenuItem key={navLink.key}>
+          {NavMenuItems.map((item) => (
+            <DropdownMenuItem key={item.key}>
               <Link
-                href=""
+                href={item.link}
                 className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
               >
-                {navLink.icon}
-                <span>{navLink.tooltip}</span>
+                {item.icon}
+                <span>{item.tip}</span>
               </Link>
             </DropdownMenuItem>
           ))}
@@ -204,7 +209,7 @@ function MiniNav() {
                 className="flex p-1 size-full rounded-sm gap-2 items-center hover:bg-white/20"
               >
                 {item.icon}
-                <span>{item.itemTitle}</span>
+                <span>{item.tip}</span>
               </Link>
             </DropdownMenuItem>
           ))}
