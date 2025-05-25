@@ -1,0 +1,72 @@
+import { User } from "./models";
+
+export const sampleUserData: User = {
+  id: 0,
+  name: "Benny",
+  jobApps: [
+    {
+      id: 0,
+      company: "Vercel",
+      location: "Silicon Valley, California",
+      position: "Frontend",
+      appStatus: "Applied",
+      dateApplied: new Date("5/23/2025"),
+    },
+    {
+      id: 1,
+      company: "Datadog",
+      location: "Jersey City, New Jersey",
+      position: "Frontend",
+      appStatus: "Rejected",
+      dateApplied: new Date("5/20/2025"),
+    },
+    {
+      id: 2,
+      company: "Mercor",
+      location: "New York, New York",
+      position: "Backend",
+      appStatus: "Interview",
+      dateApplied: new Date("5/17/2025"),
+    },
+    {
+      company: "Fetch",
+      location: "Jersey City, New Jersey",
+      position: "Android Dev",
+      appStatus: "Interview",
+      dateApplied: new Date("5/14/2025"),
+      id: 3,
+    },
+    {
+      company: "Walmart",
+      location: "New Brunswick, New Jersey",
+      position: "Frontend",
+      appStatus: "Offer",
+      dateApplied: new Date("4/23/2025"),
+      id: 4,
+    },
+    {
+      company: "Google",
+      location: "Jersey City, New Jersey",
+      position: "Frontend",
+      appStatus: "Rejected",
+      dateApplied: new Date("5/10/2025"),
+      id: 5,
+    },
+    {
+      company: "Amazon",
+      location: "Newark, New Jersey",
+      position: "Backend",
+      appStatus: "Offer",
+      dateApplied: new Date("3/23/2025"),
+      id: 6,
+    },
+    {
+      company: "Audible",
+      location: "Jersey City, New Jersey",
+      position: "Android Dev",
+      appStatus: "Applied",
+      dateApplied: new Date("5/14/2025"),
+      id: 7,
+    },
+  ],
+};

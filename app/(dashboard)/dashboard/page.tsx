@@ -13,6 +13,8 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { ReactNode } from "react";
+import { DashPieChart } from "./chart";
+import { sampleUserData } from "@/lib/data/sample";
 
 export default function Page() {
   return (
@@ -31,20 +33,15 @@ export default function Page() {
           <CardHeader>
             <CardTitle>Recent Applications</CardTitle>
             <CardDescription>
-              You've applied to 5 jobs in the last month
+              You've applied to {""} jobs in the last month
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {/* <DataTable columns={columns} data={sampleUserData[0].jobApps} /> */}
           </CardContent>
         </Card>
         <div className="grid gap-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Application Status</CardTitle>
-            </CardHeader>
-            <CardContent>
-            </CardContent>
-          </Card>
+          <DashPieChart data={sampleUserData} />
           <Card>
             <CardHeader>
               <CardTitle>Upcoming Interviews</CardTitle>
@@ -109,7 +106,8 @@ function DashMiniCards() {
           <div className="flex flex-col gap-1">
             <CardContent className="text-xl">{card.total}</CardContent>
             <CardFooter className="text-sm text-gray-400">
-              +{card.change > 1 ? card.change : `${card.change * 100}%`} since last week
+              +{card.change > 1 ? card.change : `${card.change * 100}%`}{" "}
+              since last week
             </CardFooter>
           </div>
         </Card>
