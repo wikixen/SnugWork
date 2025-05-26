@@ -1,6 +1,13 @@
 "use client";
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { JobApp } from "@/lib/data/models";
 import { sampleUserData } from "@/lib/data/sample";
 import {
@@ -47,7 +54,7 @@ const columns: ColumnDef<JobApp>[] = [
   {
     accessorKey: "appStatus",
     header: "Status",
-    cell: ({ row }) => <div> {row.getValue("appStatus")}</div>,
+    cell: ({ row }) => <div>{row.getValue("appStatus")}</div>,
   },
   {
     accessorKey: "dateApplied",
@@ -70,7 +77,9 @@ const columns: ColumnDef<JobApp>[] = [
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel className="font-semibold">Actions</DropdownMenuLabel>
+          <DropdownMenuLabel className="font-semibold">
+            Actions
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Edit</DropdownMenuItem>
           <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
@@ -90,8 +99,8 @@ export function DataTable() {
     initialState: {
       pagination: {
         pageSize: 25,
-      }
-    }
+      },
+    },
   });
 
   return (
