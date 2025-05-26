@@ -1,6 +1,7 @@
 "use client";
-
 // This is for the pie chart that I use in the dashboard route
+
+import { fill } from "@/components/chartFill";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
@@ -47,13 +48,6 @@ export function DashPieChart({ data }: { data: User }) {
     appStatus,
     count,
   }));
-  // fill is used to add color to each of the appStatus types
-  const fill = {
-    Applied: "#4f46e5",
-    Interview: "#f59e0b",
-    Offer: "#10b981",
-    Rejected: "#ef4444",
-  };
 
   // res contains final array with sums & color for pie chart
   const res = statusCount.map((item) => {
@@ -79,7 +73,6 @@ export function DashPieChart({ data }: { data: User }) {
               data={res}
               dataKey="count"
               nameKey="appStatus"
-              innerRadius={80}
             />
             <ChartLegend
               content={<ChartLegendContent nameKey="appStatus" />}

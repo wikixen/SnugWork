@@ -2,10 +2,11 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { User } from "@/lib/data/models";
+import { sampleUserData } from "@/lib/data/sample";
 import {
   ActivityIcon,
   ClipboardList,
@@ -14,9 +15,17 @@ import {
 } from "lucide-react";
 import { ReactNode } from "react";
 import { DashPieChart } from "./chart";
-import { sampleUserData } from "@/lib/data/sample";
+import { DataTable } from "./data-table";
 
 export default function Page() {
+  const currMonth = new Date().getMonth();
+  const totalApply = sampleUserData.jobApps
+    .filter((x) => x.appStatus === "Applied")
+    .reduce((acc, app) => {
+      if (app.dateApplied.getMonth() === currMonth) acc++;
+      return acc;
+    }, 0);
+
   return (
     <section className="flex flex-col gap-8">
       <section>
@@ -26,29 +35,23 @@ export default function Page() {
         </h2>
       </section>
       <section className="grid gap-4 lg:grid-cols-4">
-        <DashMiniCards />
+        <DashMiniCards data={sampleUserData} />
       </section>
       <section className="grid gap-4 lg:grid-cols-[1fr_.5fr]">
         <Card>
           <CardHeader>
             <CardTitle>Recent Applications</CardTitle>
             <CardDescription>
-              You've applied to {""} jobs in the last month
+              You've applied to {totalApply} jobs in the last month
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {/* <DataTable columns={columns} data={sampleUserData[0].jobApps} /> */}
+            <DataTable />
           </CardContent>
         </Card>
         <div className="grid gap-4">
           <DashPieChart data={sampleUserData} />
-          <Card>
-            <CardHeader>
-              <CardTitle>Upcoming Interviews</CardTitle>
-            </CardHeader>
-            <CardContent>
-            </CardContent>
-          </Card>
+          <InterviewCard data={sampleUserData} />
         </div>
       </section>
     </section>
@@ -60,39 +63,37 @@ interface DashMiniCardType {
   title: string;
   icon: ReactNode;
   total: number; // i.e. Total Applications = 24 or Interview Invites = 20
-  change: number; // change = current total +- last week total
 }
 
-function DashMiniCards() {
+function DashMiniCards({ data }: { data: User }) {
   // this uses sample data, change to query call
+
+  // Still need to fix change
   const MiniCardArr: DashMiniCardType[] = [
     {
       key: 1,
       title: "Total Applications",
       icon: <UsersIcon />,
-      total: 20,
-      change: 4,
+      total: data.jobApps.length,
     },
     {
       key: 2,
       title: "Interview Invites",
       icon: <ClipboardList />,
-      total: 20,
-      change: 4,
+      total: data.jobApps.filter((x) => x.appStatus === "Interview").length,
     },
     {
       key: 3,
       title: "Offers",
       icon: <PartyPopper />,
-      total: 20,
-      change: 4,
+      total: data.jobApps.filter((x) => x.appStatus === "Offer").length,
     },
     {
       key: 4,
       title: "Response Rate",
       icon: <ActivityIcon />,
-      total: 20,
-      change: .4,
+      total: (data.jobApps.filter((x) => x.appStatus !== "Applied").length /
+        data.jobApps.length),
     },
   ];
   return (
@@ -104,14 +105,39 @@ function DashMiniCards() {
             {card.icon}
           </CardHeader>
           <div className="flex flex-col gap-1">
-            <CardContent className="text-xl">{card.total}</CardContent>
-            <CardFooter className="text-sm text-gray-400">
-              +{card.change > 1 ? card.change : `${card.change * 100}%`}{" "}
-              since last week
-            </CardFooter>
+            <CardContent className="text-xl">
+              {card.total >= 1
+                ? card.total
+                : `${(card.total * 100).toFixed(1)}%`}
+            </CardContent>
           </div>
         </Card>
       ))}
     </>
+  );
+}
+
+function InterviewCard({ data }: { data: User }) {
+  const interviews = data.jobApps.filter((x) => x.appStatus === "Interview")
+    .slice(0, 5);
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Upcoming Interviews</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-2">
+        {interviews.map((item) => (
+          <Card key={item.id}>
+            <CardHeader>
+              <CardTitle>{item.company}</CardTitle>
+              <CardDescription>{item.position}</CardDescription>
+              <CardDescription className="text-xs">
+                Applied on {item.dateApplied.toLocaleDateString()}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
+      </CardContent>
+    </Card>
   );
 }

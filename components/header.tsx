@@ -36,9 +36,6 @@ export default function Header() {
       <section className="font-bold text-2xl">
         SnugWork
       </section>
-      <section className="max-w-[60rem] not-sm:hidden">
-        <Search />
-      </section>
       <nav className="flex justify-end">
         <div className="not-sm:hidden">
           <NavBar />
@@ -83,18 +80,6 @@ const NavMenuItems = [
     link: "/dashboard",
     icon: <LayoutDashboard />,
     tip: "Dashboard",
-  },
-  {
-    key: 2,
-    link: "/applications",
-    icon: <ListIcon />,
-    tip: "Applications",
-  },
-  {
-    key: 3,
-    link: "/calendar",
-    icon: <CalendarIcon />,
-    tip: "Calendar",
   },
 ];
 

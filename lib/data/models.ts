@@ -4,7 +4,7 @@ export interface User {
   jobApps: JobApp[];
 }
 
-interface JobApp {
+export interface JobApp {
   id: number;
   company: string;
   location: string;
