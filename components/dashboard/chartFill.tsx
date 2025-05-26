@@ -1,4 +1,4 @@
-// Color scheme for PieChart in Dashboard & for the tables in Dashboard & Application
+// Color scheme for the PieChart & table in Dashboard
 export const fill = {
   Applied: "#4f46e5",
   Interview: "#f59e0b",

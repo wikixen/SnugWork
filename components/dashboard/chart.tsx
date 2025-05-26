@@ -1,7 +1,7 @@
 "use client";
 // This is for the pie chart that I use in the dashboard route
 
-import { fill } from "@/components/chartFill";
+import { fill } from "@/components/dashboard/chartFill";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
@@ -20,19 +20,19 @@ const chartConfig = {
   },
   Applied: {
     label: "Applied",
-    color: "#4f46e5",
+    color: fill.Applied,
   },
   Interview: {
     label: "Interview",
-    color: "#f59e0b",
+    color: fill.Interview,
   },
   Offer: {
     label: "Offer",
-    color: "#10b981",
+    color: fill.Offer,
   },
   Rejected: {
     label: "Rejected",
-    color: "#ef4444",
+    color: fill.Rejected,
   },
 } satisfies ChartConfig;
 

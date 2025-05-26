@@ -1,7 +1,7 @@
 "use client";
 
-import { LogOut, MenuIcon } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { LogOut, MenuIcon, PlusIcon } from "lucide-react";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 
 export default function Header() {
   return (
@@ -20,37 +20,46 @@ export default function Header() {
           SnugWork
         </span>
       </section>
-      <nav className="flex justify-end">
-        <div className="not-sm:hidden">
-          <Button variant="destructive">
-            <LogOut />
-            <span>Log Out</span>
-          </Button>
-        </div>
-        <div className="sm:hidden">
-          <MiniNav />
-        </div>
-      </nav>
+      <div className="not-sm:hidden flex gap-2">
+        <Button className="cursor-pointer">
+          <PlusIcon />
+          <span>Add Job</span>
+        </Button>
+        <Button variant="destructive" className="cursor-pointer">
+          <LogOut />
+          <span>Log Out</span>
+        </Button>
+      </div>
+      <div className="sm:hidden">
+        <MiniMenu />
+      </div>
     </header>
   );
 }
 
-function MiniNav() {
+// MiniMenu is only shown on small screens & contains the add & log out btns
+function MiniMenu() {
   return (
     <>
       <DropdownMenu modal={false}>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger asChild className="cursor-pointer">
           <Button variant="outline">
             <MenuIcon />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel className="font-semibold">
-            My Account
+            Options
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <div className="flex p-1 size-full rounded-sm gap-2 items-center cursor-pointer">
+              <PlusIcon />
+              <span>Add Job</span>
+            </div>
+          </DropdownMenuItem>
           <DropdownMenuItem variant="destructive">
-            <div className="flex p-1 size-full rounded-sm gap-2 items-center">
+            <div className="flex p-1 size-full rounded-sm gap-2 items-center cursor-pointer">
               <LogOut />
               Log Out
             </div>
@@ -60,3 +69,4 @@ function MiniNav() {
     </>
   );
 }
+

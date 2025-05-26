@@ -18,7 +18,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,8 +26,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu";
-import { useState } from "react";
+} from "../ui/dropdown-menu";
 
 const columns: ColumnDef<JobApp>[] = [
   {
@@ -71,7 +70,7 @@ const columns: ColumnDef<JobApp>[] = [
     cell: () => (
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
+          <Button variant="ghost" className="h-8 w-8 p-0 cursor-pointer">
             <span className="sr-only">Open menu</span>
             <MoreHorizontal />
           </Button>
@@ -81,8 +80,8 @@ const columns: ColumnDef<JobApp>[] = [
             Actions
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive" className="cursor-pointer">Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     ),
