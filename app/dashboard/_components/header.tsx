@@ -1,15 +1,9 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import { LogOut, MenuIcon, PlusIcon } from "lucide-react";
-import { Button } from "../ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
 
 export default function Header() {
   return (
@@ -25,13 +19,15 @@ export default function Header() {
           <PlusIcon />
           <span>Add Job</span>
         </Button>
-        <Button variant="destructive" className="cursor-pointer">
-          <LogOut />
-          <span>Log Out</span>
-        </Button>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
       <div className="sm:hidden">
         <MiniMenu />
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </header>
   );
@@ -56,12 +52,6 @@ function MiniMenu() {
             <div className="flex p-1 size-full rounded-sm gap-2 items-center cursor-pointer">
               <PlusIcon />
               <span>Add Job</span>
-            </div>
-          </DropdownMenuItem>
-          <DropdownMenuItem variant="destructive">
-            <div className="flex p-1 size-full rounded-sm gap-2 items-center cursor-pointer">
-              <LogOut />
-              Log Out
             </div>
           </DropdownMenuItem>
         </DropdownMenuContent>

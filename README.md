@@ -4,10 +4,9 @@
 
 - [x] Deploy app to vercel
 - [x] Scaffold basic UI
-- [ ] Setup DB(Vercel Postgres & DrizzleORM)
+- [x] [Add auth(Clerk)](https://clerk.com/)
+- [ ] Setup DB(Neon Postgres & DrizzleORM)
 - [ ] Attach DB to UI
-- [ ] [Add auth(Clerk)](https://clerk.com/)
 - [ ] Error management(Sentry?)
 - [ ] Routing
-- [ ] Analytics(Posthog)
 - [ ] Ratelimiting(Upstash)

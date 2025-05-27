@@ -1,7 +1,6 @@
 "use client";
 // This is for the pie chart that I use in the dashboard route
 
-import { fill } from "@/components/dashboard/chartFill";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
@@ -13,6 +12,7 @@ import {
 } from "@/components/ui/chart";
 import { User } from "@/lib/data/models";
 import { Pie, PieChart } from "recharts";
+import { fill } from "./chartFill";
 
 const chartConfig = {
   count: {

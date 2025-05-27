@@ -9,6 +9,12 @@ import {
 import { ArrowRight, Briefcase, TrendingUpIcon } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
+import {
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 
 interface HomeCardProps {
   id: number;
@@ -46,13 +52,16 @@ export default function Home() {
             our<br />
             comprehensive job search management platform.
           </h2>
-          <Button className="w-1/4 max-w-[16rem] cursor-pointer">
-            <Link href="/signup" className="flex gap-2 items-center">
-              <span className="sr-only">Sign Up</span>
-              <span>Get Started</span>
-              <ArrowRight />
-            </Link>
-          </Button>
+          <SignedOut>
+            <SignUpButton
+              children={
+              <Button className="w-1/4 max-w-[12rem] cursor-pointer">
+                <span className="sr-only">Sign Up</span>
+                <span>Get Started</span>
+                <ArrowRight />
+              </Button>
+            } />
+          </SignedOut>
         </section>
         <section className="space-y-4">
           <section className="flex flex-col gap-4 items-center">

@@ -14,8 +14,9 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { ReactNode } from "react";
-import { DashPieChart } from "../../components/dashboard/chart";
-import { DataTable } from "../../components/dashboard/data-table";
+import { DashPieChart } from "./_components/chart";
+import { DataTable } from "./_components/data-table";
+
 
 export default function Page() {
   const currMonth = new Date().getMonth();

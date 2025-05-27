@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs';
 
 export default function Header() {
   return (
@@ -10,11 +15,15 @@ export default function Header() {
           SnugWork
         </span>
       </section>
-      <Button>
-        <Link href="/login">
-          Log In
-        </Link>
-      </Button>
+      <SignedOut>
+        <SignInButton
+          forceRedirectUrl={"/dashboard"}
+          children={
+          <Button className="cursor-pointer">
+            Log In
+          </Button>
+        } />
+      </SignedOut>
     </header>
   );
 }
