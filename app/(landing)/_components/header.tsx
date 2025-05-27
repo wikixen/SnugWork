@@ -1,10 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs';
+import { SignedOut, SignInButton } from "@clerk/nextjs";
 
 export default function Header() {
   return (
@@ -19,10 +14,11 @@ export default function Header() {
         <SignInButton
           forceRedirectUrl={"/dashboard"}
           children={
-          <Button className="cursor-pointer">
-            Log In
-          </Button>
-        } />
+            <Button className="cursor-pointer">
+              Log In
+            </Button>
+          }
+        />
       </SignedOut>
     </header>
   );

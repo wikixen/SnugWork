@@ -9,12 +9,7 @@ import {
 import { ArrowRight, Briefcase, TrendingUpIcon } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
-import {
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignUpButton, UserButton } from "@clerk/nextjs";
 
 interface HomeCardProps {
   id: number;
@@ -55,12 +50,13 @@ export default function Home() {
           <SignedOut>
             <SignUpButton
               children={
-              <Button className="w-1/4 max-w-[12rem] cursor-pointer">
-                <span className="sr-only">Sign Up</span>
-                <span>Get Started</span>
-                <ArrowRight />
-              </Button>
-            } />
+                <Button className="w-1/4 max-w-[12rem] cursor-pointer">
+                  <span className="sr-only">Sign Up</span>
+                  <span>Get Started</span>
+                  <ArrowRight />
+                </Button>
+              }
+            />
           </SignedOut>
         </section>
         <section className="space-y-4">

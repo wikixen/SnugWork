@@ -17,7 +17,6 @@ import { ReactNode } from "react";
 import { DashPieChart } from "./_components/chart";
 import { DataTable } from "./_components/data-table";
 
-
 export default function Page() {
   const currMonth = new Date().getMonth();
   const totalApply = sampleUserData.jobApps

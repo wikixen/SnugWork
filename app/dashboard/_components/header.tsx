@@ -1,9 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { SignedIn, UserButton } from "@clerk/nextjs";
-import { LogOut, MenuIcon, PlusIcon } from "lucide-react";
+import { MenuIcon, PlusIcon } from "lucide-react";
 
 export default function Header() {
   return (
@@ -59,4 +66,3 @@ function MiniMenu() {
     </>
   );
 }
-
