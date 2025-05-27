@@ -6,10 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { SignedOut, SignUpButton } from "@clerk/nextjs";
 import { ArrowRight, Briefcase, TrendingUpIcon } from "lucide-react";
-import Link from "next/link";
 import { ReactNode } from "react";
-import { SignedIn, SignedOut, SignUpButton, UserButton } from "@clerk/nextjs";
 
 interface HomeCardProps {
   id: number;

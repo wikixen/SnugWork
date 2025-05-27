@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { User } from "@/lib/data/models";
-import { sampleUserData } from "@/lib/data/sample";
+import { JobApp } from "@/lib/data/models";
+import { db } from "@/server/db/db";
 import {
   ActivityIcon,
   ClipboardList,
@@ -17,9 +17,13 @@ import { ReactNode } from "react";
 import { DashPieChart } from "./_components/chart";
 import { DataTable } from "./_components/data-table";
 
-export default function Page() {
+export const dynamic = "force-dynamic"
+
+export default async function Page() {
+  const data = await db.query.jobsTable.findMany() as JobApp[];
+
   const currMonth = new Date().getMonth();
-  const totalApply = sampleUserData.jobApps
+  const totalApply = data
     .filter((x) => x.appStatus === "Applied")
     .reduce((acc, app) => {
       if (app.dateApplied.getMonth() === currMonth) acc++;
@@ -35,7 +39,7 @@ export default function Page() {
         </h2>
       </section>
       <section className="grid gap-4 lg:grid-cols-4">
-        <DashMiniCards data={sampleUserData} />
+        <DashMiniCards data={data} />
       </section>
       <section className="grid gap-4 lg:grid-cols-[1fr_.5fr]">
         <Card>
@@ -46,12 +50,12 @@ export default function Page() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <DataTable />
+            <DataTable data={data} />
           </CardContent>
         </Card>
         <div className="grid gap-4">
-          <DashPieChart data={sampleUserData} />
-          <InterviewCard data={sampleUserData} />
+          <DashPieChart data={data} />
+          <InterviewCard data={data} />
         </div>
       </section>
     </section>
@@ -65,7 +69,7 @@ interface DashMiniCardType {
   total: number; // i.e. Total Applications = 24 or Interview Invites = 20
 }
 
-function DashMiniCards({ data }: { data: User }) {
+function DashMiniCards({ data }: { data: JobApp[] }) {
   // this uses sample data, change to query call
 
   // Still need to fix change
@@ -74,26 +78,26 @@ function DashMiniCards({ data }: { data: User }) {
       key: 1,
       title: "Total Applications",
       icon: <UsersIcon />,
-      total: data.jobApps.length,
+      total: data.length,
     },
     {
       key: 2,
       title: "Interview Invites",
       icon: <ClipboardList />,
-      total: data.jobApps.filter((x) => x.appStatus === "Interview").length,
+      total: data.filter((x) => x.appStatus === "Interview").length,
     },
     {
       key: 3,
       title: "Offers",
       icon: <PartyPopper />,
-      total: data.jobApps.filter((x) => x.appStatus === "Offer").length,
+      total: data.filter((x) => x.appStatus === "Offer").length,
     },
     {
       key: 4,
       title: "Response Rate",
       icon: <ActivityIcon />,
-      total: (data.jobApps.filter((x) => x.appStatus !== "Applied").length /
-        data.jobApps.length),
+      total: (data.filter((x) => x.appStatus !== "Applied").length /
+        data.length),
     },
   ];
   return (
@@ -117,8 +121,8 @@ function DashMiniCards({ data }: { data: User }) {
   );
 }
 
-function InterviewCard({ data }: { data: User }) {
-  const interviews = data.jobApps.filter((x) => x.appStatus === "Interview")
+function InterviewCard({ data }: { data: JobApp[] }) {
+  const interviews = data.filter((x) => x.appStatus === "Interview")
     .slice(0, 5);
   return (
     <Card>

@@ -1,6 +1,6 @@
 {
-  "id": "586ad8f2-5ebc-45f2-8c62-974499fa2dda",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "00120bb7-17b3-4396-8847-b6d69641f70f",
+  "prevId": "586ad8f2-5ebc-45f2-8c62-974499fa2dda",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -40,15 +40,18 @@
         },
         "appStatus": {
           "name": "appStatus",
-          "type": "varchar(255)",
+          "type": "appStatus",
+          "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'Applied'"
         },
         "dateApplied": {
           "name": "dateApplied",
-          "type": "timestamp",
+          "type": "date",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "created_at": {
           "name": "created_at",
@@ -73,7 +76,18 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.appStatus": {
+      "name": "appStatus",
+      "schema": "public",
+      "values": [
+        "Applied",
+        "Interview",
+        "Offer",
+        "Rejected"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},

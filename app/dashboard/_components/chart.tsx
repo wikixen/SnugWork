@@ -10,9 +10,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { User } from "@/lib/data/models";
 import { Pie, PieChart } from "recharts";
 import { fill } from "./chartFill";
+import { JobApp } from "@/lib/data/models";
 
 const chartConfig = {
   count: {
@@ -36,9 +36,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function DashPieChart({ data }: { data: User }) {
+export function DashPieChart({ data }: { data: JobApp[] }) {
   // jobApps sums all of the appStatus by type i.e. sum(All jobApps that have status interview), etc.
-  const jobApps = data.jobApps
+  const jobApps = data
     .reduce((acc: any, { appStatus }) => {
       acc[appStatus] = (acc[appStatus] || 0) + 1;
       return acc;

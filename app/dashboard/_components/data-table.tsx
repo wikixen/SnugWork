@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { JobApp } from "@/lib/data/models";
-import { sampleUserData } from "@/lib/data/sample";
+import { sampleData } from "@/lib/data/sample";
 import {
   ColumnDef,
   flexRender,
@@ -90,8 +90,7 @@ const columns: ColumnDef<JobApp>[] = [
   },
 ];
 
-export function DataTable() {
-  const data = sampleUserData.jobApps;
+export function DataTable({data}: {data: JobApp[]}) {
   const table = useReactTable({
     data,
     columns,
