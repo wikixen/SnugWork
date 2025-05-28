@@ -48,6 +48,7 @@ export default function Home() {
           </h2>
           <SignedOut>
             <SignUpButton
+              forceRedirectUrl={"/dashboard"}
               children={
                 <Button className="w-1/4 max-w-[12rem] cursor-pointer">
                   <span className="sr-only">Sign Up</span>

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { MenuIcon, PlusIcon } from "lucide-react";
+import CreateDialog from "./createDialog";
 
 export default function Header() {
   return (
@@ -22,15 +23,17 @@ export default function Header() {
         </span>
       </section>
       <div className="not-sm:hidden flex gap-2">
-        <Button className="cursor-pointer">
-          <PlusIcon />
-          <span>Add Job</span>
-        </Button>
+        <CreateDialog trigger={
+          <Button className="cursor-pointer">
+            <PlusIcon />
+            <span>Add Job</span>
+          </Button>
+        } />
         <SignedIn>
           <UserButton />
         </SignedIn>
       </div>
-      <div className="sm:hidden">
+      <div className="sm:hidden flex items-center gap-2">
         <MiniMenu />
         <SignedIn>
           <UserButton />
@@ -55,11 +58,13 @@ function MiniMenu() {
             Options
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <div className="flex p-1 size-full rounded-sm gap-2 items-center cursor-pointer">
-              <PlusIcon />
-              <span>Add Job</span>
-            </div>
+          <DropdownMenuItem asChild>
+            <CreateDialog trigger={
+              <div className="flex p-1 size-full rounded-sm gap-2 items-center cursor-pointer">
+                <PlusIcon />
+                <span>Add Job</span>
+              </div>
+            } />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

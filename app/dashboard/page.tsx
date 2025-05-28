@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { JobApp } from "@/lib/data/models";
 import { db } from "@/server/db/db";
+import { jobs } from "@/server/db/schema";
 import {
   ActivityIcon,
   ClipboardList,
@@ -20,7 +21,9 @@ import { DataTable } from "./_components/data-table";
 export const dynamic = "force-dynamic"
 
 export default async function Page() {
-  const data = await db.query.jobsTable.findMany() as JobApp[];
+  const data = await db.query.jobs.findMany({
+    orderBy: [(jobs.dateApplied)]
+  }) as JobApp[];
 
   const currMonth = new Date().getMonth();
   const totalApply = data
@@ -70,9 +73,6 @@ interface DashMiniCardType {
 }
 
 function DashMiniCards({ data }: { data: JobApp[] }) {
-  // this uses sample data, change to query call
-
-  // Still need to fix change
   const MiniCardArr: DashMiniCardType[] = [
     {
       key: 1,

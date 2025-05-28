@@ -14,7 +14,7 @@ export const statusEnum = pgEnum("appStatus", [
   "Rejected",
 ]);
 
-export const jobsTable = pgTable("jobs", {
+export const jobs = pgTable("jobs", {
   id: serial("id").primaryKey(),
   userId: varchar("user_id", { length: 255 }).notNull(),
   company: varchar({ length: 255 }).notNull(),
@@ -32,5 +32,5 @@ export const jobsTable = pgTable("jobs", {
   updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
 });
 
-export type InsertJob = typeof jobsTable.$inferInsert;
-export type SelectJob = typeof jobsTable.$inferSelect;
+export type InsertJob = typeof jobs.$inferInsert;
+export type SelectJob = typeof jobs.$inferSelect;
