@@ -19,6 +19,6 @@ export const formSchema = z.object({
   appStatus: z.enum(["Applied", "Interview", "Offer", "Rejected"]),
   dateApplied: z.date()
     .max(new Date(Date.now()), {
-    message: "Date applied can't be in the future",
-    })
+      message: "Date applied can't be in the future",
+    }),
 });

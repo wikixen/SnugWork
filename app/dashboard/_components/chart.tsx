@@ -42,8 +42,8 @@ export function DashPieChart({ data }: { data: JobApp[] }) {
     Applied: 0,
     Interview: 0,
     Offer: 0,
-    Rejected: 0
-  }
+    Rejected: 0,
+  };
   // jobApps sums all of the appStatus by type i.e. sum(All jobApps that have status interview), etc.
   const jobApps = data
     .reduce((acc, { appStatus }) => {
@@ -54,7 +54,7 @@ export function DashPieChart({ data }: { data: JobApp[] }) {
   const statusCount = Object.entries(jobApps).map(([appStatus, count]) => ({
     appStatus,
     count,
-    fill: ""
+    fill: "",
   }));
 
   // res contains final array with sums & color for pie chart
@@ -63,7 +63,7 @@ export function DashPieChart({ data }: { data: JobApp[] }) {
     return item;
   });
 
-  console.log(res)
+  console.log(res);
 
   return (
     <Card>

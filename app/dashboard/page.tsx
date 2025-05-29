@@ -12,7 +12,7 @@ import {
   ActivityIcon,
   ClipboardList,
   PartyPopper,
-  UsersIcon
+  UsersIcon,
 } from "lucide-react";
 import { ReactNode } from "react";
 import { DashPieChart } from "./_components/chart";

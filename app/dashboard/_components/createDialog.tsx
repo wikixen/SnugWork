@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -18,11 +17,21 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectValue } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
 import { JobApp } from "@/lib/data/models";
 import { cn } from "@/lib/utils";
 import { formSchema } from "@/lib/zodSchema";
@@ -33,9 +42,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { createJob } from "../actions/createJob";
 import { useState } from "react";
+import { Calendar } from "@/components/calendar";
 
 export default function CreateDialog() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     mode: "onBlur",
     resolver: zodResolver(formSchema),
@@ -43,14 +53,14 @@ export default function CreateDialog() {
       company: "",
       location: "",
       position: "",
-      appStatus: "Applied"
+      appStatus: "Applied",
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    createJob(values as JobApp)
-    setOpen(false)
-    console.log(values)
+    createJob(values as JobApp);
+    setOpen(false);
+    console.log(values);
   };
 
   return (
@@ -64,7 +74,9 @@ export default function CreateDialog() {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>New Job Application</DialogTitle>
-          <DialogDescription>{`Add a job that you've applied to below`}</DialogDescription>
+          <DialogDescription>
+            {`Add a job that you've applied to below`}
+          </DialogDescription>
         </DialogHeader>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -118,11 +130,11 @@ export default function CreateDialog() {
                   <FormLabel>Application Status</FormLabel>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}  
+                    defaultValue={field.value}
                   >
                     <FormControl className="border-1 rounded-md text-sm text-start py-[.45rem] px-3 bg-white/5">
                       <SelectTrigger>
-                        <SelectValue placeholder="Applied"/>
+                        <SelectValue placeholder="Applied" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -141,7 +153,7 @@ export default function CreateDialog() {
                 </FormItem>
               )}
             />
-            {/* <FormField
+            <FormField
               control={form.control}
               name="dateApplied"
               render={({ field }) => (
@@ -152,10 +164,15 @@ export default function CreateDialog() {
                       <FormControl>
                         <Button
                           variant={"outline"}
-                          className={cn("w-auto justify-start text-left font-normal", !field.value && "text-muted-foreground")}
+                          className={cn(
+                            "w-auto justify-start text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
                         >
-                          <CalendarIcon className="opacity-50"/>
-                          {field.value ? field.value.toLocaleDateString() : <span>Pick a date</span>}
+                          <CalendarIcon className="opacity-50" />
+                          {field.value
+                            ? field.value.toLocaleDateString()
+                            : <span>Pick a date</span>}
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
@@ -164,16 +181,15 @@ export default function CreateDialog() {
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date("1900-01-01")
-                        }
+                        disabled={(date: Date) =>
+                          date > new Date() || date < new Date("1900-01-01")}
                       />
                     </PopoverContent>
                   </Popover>
                   <FormMessage />
                 </FormItem>
               )}
-            /> */}
+            />
           </Form>
           <DialogFooter className="flex justify-end">
             <Button type="submit">Save</Button>

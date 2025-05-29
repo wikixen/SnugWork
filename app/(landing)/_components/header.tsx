@@ -6,7 +6,13 @@ export default function Header() {
   return (
     <header className="flex justify-between gap-8 items-center py-4 border-b-1">
       <section className="font-bold text-2xl flex">
-        <Image src={"/logoDark.png"} alt="Logo" className="size-12" width={1920} height={1080} />
+        <Image
+          src={"/logoDark.png"}
+          alt="Logo"
+          className="size-12"
+          width={1920}
+          height={1080}
+        />
         <span>
           SnugWork
         </span>
