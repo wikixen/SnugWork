@@ -52,14 +52,17 @@ export function DashPieChart({ data }: { data: JobApp[] }) {
 
   const statusCount = Object.entries(jobApps).map(([appStatus, count]) => ({
     appStatus,
-    count
+    count,
+    fill: ""
   }));
 
   // res contains final array with sums & color for pie chart
   const res = statusCount.map((item) => {
-    (item as any).fill = (fill as any)[item.appStatus];
+    item.fill = fill[item.appStatus];
     return item;
   });
+
+  console.log(res)
 
   return (
     <Card>
