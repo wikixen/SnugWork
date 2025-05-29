@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,29 +10,24 @@ import {
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { MenuIcon, PlusIcon } from "lucide-react";
 import CreateDialog from "./createDialog";
+import Image from "next/image";
 
-export default function Header() {
+export default async function Header() {
   return (
     <header className="flex justify-between gap-8 items-center py-4 border-b-1">
       <section className="font-bold text-2xl flex">
-        <img src={"/logoDark.png"} alt="Logo" className="size-12" />
+        <Image src={"/logoDark.png"} alt="Logo" className="size-12" width={1920} height={1080} />
         <span>
           SnugWork
         </span>
       </section>
       <div className="not-sm:hidden flex gap-2">
-        <CreateDialog trigger={
-          <Button className="cursor-pointer">
-            <PlusIcon />
-            <span>Add Job</span>
-          </Button>
-        } />
+        <CreateDialog />
         <SignedIn>
           <UserButton />
         </SignedIn>
       </div>
       <div className="sm:hidden flex items-center gap-2">
-        <MiniMenu />
         <SignedIn>
           <UserButton />
         </SignedIn>
@@ -59,12 +52,7 @@ function MiniMenu() {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
-            <CreateDialog trigger={
-              <div className="flex p-1 size-full rounded-sm gap-2 items-center cursor-pointer">
-                <PlusIcon />
-                <span>Add Job</span>
-              </div>
-            } />
+            <CreateDialog />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

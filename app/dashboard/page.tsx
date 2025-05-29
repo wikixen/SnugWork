@@ -12,17 +12,17 @@ import {
   ActivityIcon,
   ClipboardList,
   PartyPopper,
-  UsersIcon,
+  UsersIcon
 } from "lucide-react";
 import { ReactNode } from "react";
 import { DashPieChart } from "./_components/chart";
 import { DataTable } from "./_components/data-table";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const data = await db.query.jobs.findMany({
-    orderBy: [(jobs.dateApplied)]
+    orderBy: [jobs.dateApplied],
   }) as JobApp[];
 
   const currMonth = new Date().getMonth();
@@ -35,11 +35,13 @@ export default async function Page() {
 
   return (
     <section className="flex flex-col gap-8">
-      <section>
-        <h1 className="text-3xl font-semibold">Dashboard</h1>
-        <h2 className="text-gray-400">
-          Track your job applications and stay organized.
-        </h2>
+      <section className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-semibold">Dashboard</h1>
+          <p className="text-gray-400">
+            Track your job applications and stay organized.
+          </p>
+        </div>
       </section>
       <section className="grid gap-4 lg:grid-cols-4">
         <DashMiniCards data={data} />
