@@ -13,6 +13,7 @@ import {
 import { Pie, PieChart } from "recharts";
 import { fill } from "./chartFill";
 import { JobApp } from "@/lib/data/models";
+import { string } from "zod";
 
 const chartConfig = {
   count: {
@@ -58,7 +59,7 @@ export function DashPieChart({ data }: { data: JobApp[] }) {
 
   // res contains final array with sums & color for pie chart
   const res = statusCount.map((item) => {
-    item.fill = fill[item.appStatus];
+    item.fill = fill[item.appStatus as keyof typeof string];
     return item;
   });
 
