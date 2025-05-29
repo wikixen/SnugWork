@@ -42,7 +42,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { createJob } from "../actions/createJob";
 import { useState } from "react";
-import { Calendar } from "@/components/calendar";
+import { Calendar } from "@/components/ui/calendar";
 
 export default function CreateDialog() {
   const [open, setOpen] = useState(false);
