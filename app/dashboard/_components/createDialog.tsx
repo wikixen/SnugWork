@@ -26,12 +26,9 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectValue } from "@/c
 import { JobApp } from "@/lib/data/models";
 import { cn } from "@/lib/utils";
 import { formSchema } from "@/lib/zodSchema";
-import { db } from "@/server/db/db";
-import { jobs } from "@/server/db/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SelectTrigger } from "@radix-ui/react-select";
 import { CalendarIcon, PlusIcon } from "lucide-react";
-import { useActionState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { createJob } from "../actions/createJob";
@@ -64,7 +61,7 @@ export default function CreateDialog() {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>New Job Application</DialogTitle>
-          <DialogDescription>Add a job that you've applied to below</DialogDescription>
+          <DialogDescription>{`Add a job that you've applied to below`}</DialogDescription>
         </DialogHeader>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -135,7 +132,7 @@ export default function CreateDialog() {
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    If no status is chosen, "Applied" is automatically selected.
+                    If no status is chosen, Applied is automatically selected.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

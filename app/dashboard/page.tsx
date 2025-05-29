@@ -51,7 +51,7 @@ export default async function Page() {
           <CardHeader>
             <CardTitle>Recent Applications</CardTitle>
             <CardDescription>
-              You've applied to {totalApply} jobs in the last month
+              {`You've applied to ${totalApply} jobs in the last month`}
             </CardDescription>
           </CardHeader>
           <CardContent>

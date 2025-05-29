@@ -8,9 +8,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SignedIn, UserButton } from "@clerk/nextjs";
-import { MenuIcon, PlusIcon } from "lucide-react";
-import CreateDialog from "./createDialog";
+import { MenuIcon } from "lucide-react";
 import Image from "next/image";
+import CreateDialog from "./createDialog";
 
 export default async function Header() {
   return (
@@ -28,6 +28,7 @@ export default async function Header() {
         </SignedIn>
       </div>
       <div className="sm:hidden flex items-center gap-2">
+        <MiniMenu />
         <SignedIn>
           <UserButton />
         </SignedIn>

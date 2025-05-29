@@ -47,16 +47,13 @@ export default function Home() {
             comprehensive job search management platform.
           </h2>
           <SignedOut>
-            <SignUpButton
-              forceRedirectUrl={"/dashboard"}
-              children={
-                <Button className="w-1/4 max-w-[12rem] cursor-pointer">
-                  <span className="sr-only">Sign Up</span>
-                  <span>Get Started</span>
-                  <ArrowRight />
-                </Button>
-              }
-            />
+            <SignUpButton forceRedirectUrl={"/dashboard"}>
+              <Button className="w-1/4 max-w-[12rem] cursor-pointer">
+                <span className="sr-only">Sign Up</span>
+                <span>Get Started</span>
+                <ArrowRight />
+              </Button>
+            </SignUpButton>
           </SignedOut>
         </section>
         <section className="space-y-4">
