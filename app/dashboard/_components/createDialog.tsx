@@ -32,8 +32,10 @@ import { CalendarIcon, PlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { createJob } from "../actions/createJob";
+import { useState } from "react";
 
 export default function CreateDialog() {
+  const [open, setOpen] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     mode: "onBlur",
     resolver: zodResolver(formSchema),
@@ -47,11 +49,12 @@ export default function CreateDialog() {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     createJob(values as JobApp)
+    setOpen(false)
     console.log(values)
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="cursor-pointer">
           <PlusIcon />
@@ -138,7 +141,7 @@ export default function CreateDialog() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="dateApplied"
               render={({ field }) => (
@@ -170,10 +173,10 @@ export default function CreateDialog() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
           </Form>
           <DialogFooter className="flex justify-end">
-            <Button type="submit" onClick={() => {}}>Save</Button>
+            <Button type="submit">Save</Button>
           </DialogFooter>
         </form>
       </DialogContent>
