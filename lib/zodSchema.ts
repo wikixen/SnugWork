@@ -21,4 +21,5 @@ export const formSchema = z.object({
     .max(new Date(Date.now()), {
       message: "Date applied can't be in the future",
     }),
+  userId: z.string()
 });

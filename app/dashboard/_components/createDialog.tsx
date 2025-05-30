@@ -40,7 +40,7 @@ import { SelectTrigger } from "@radix-ui/react-select";
 import { CalendarIcon, PlusIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { createJob } from "../actions/createJob";
+import { createJob } from "../../../server/queries/createJob";
 import { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 
@@ -54,6 +54,7 @@ export default function CreateDialog() {
       location: "",
       position: "",
       appStatus: "Applied",
+      userId: "A"
     },
   });
 

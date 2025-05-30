@@ -3,6 +3,7 @@ import { JobApp } from "@/lib/data/models";
 import { formSchema } from "@/lib/zodSchema";
 import { db } from "@/server/db/db";
 import { jobs } from "@/server/db/schema";
+import { revalidatePath } from "next/cache";
 
 export async function createJob(formData: JobApp) {
   const parse = formSchema.safeParse({ ...formData });
@@ -11,4 +12,5 @@ export async function createJob(formData: JobApp) {
   } catch (e) {
     console.error(e);
   }
+  revalidatePath("/dashboard");
 }

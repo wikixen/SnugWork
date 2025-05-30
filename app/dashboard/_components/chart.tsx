@@ -63,8 +63,6 @@ export function DashPieChart({ data }: { data: JobApp[] }) {
     return item;
   });
 
-  console.log(res);
-
   return (
     <Card>
       <CardHeader>

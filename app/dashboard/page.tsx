@@ -18,20 +18,21 @@ import { ReactNode } from "react";
 import { DashPieChart } from "./_components/chart";
 import { DataTable } from "./_components/data-table";
 
-export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const data = await db.query.jobs.findMany({
-    orderBy: [jobs.dateApplied],
-  }) as JobApp[];
-
+      orderBy: [jobs.dateApplied],
+    }) as JobApp[];
+  
+  console.log(data)
   const currMonth = new Date().getMonth();
-  const totalApply = data
+  const totalApply = (data)
     .filter((x) => x.appStatus === "Applied")
     .reduce((acc, app) => {
       if (app.dateApplied.getMonth() === currMonth) acc++;
       return acc;
     }, 0);
+
 
   return (
     <section className="flex flex-col gap-8">
