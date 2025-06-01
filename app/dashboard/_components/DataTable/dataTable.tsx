@@ -1,14 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -26,8 +17,28 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
+import DeleteDialog from "./deleteDialog";
+import EditDialog from "./editDialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 const columns: ColumnDef<JobApp>[] = [
+  {
+    accessorKey: "id",
+    header: "",
+    cell: () => <></>,
+  },
+  {
+    accessorKey: "userId",
+    header: "",
+    cell: () => <></>,
+  },
   {
     accessorKey: "company",
     header: "Company",
@@ -66,7 +77,7 @@ const columns: ColumnDef<JobApp>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: () => (
+    cell: ({ row }) => (
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0 cursor-pointer">
@@ -79,10 +90,8 @@ const columns: ColumnDef<JobApp>[] = [
             Actions
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
-          <DropdownMenuItem variant="destructive" className="cursor-pointer">
-            Delete
-          </DropdownMenuItem>
+          <EditDialog row={row} />
+          <DeleteDialog row={row.getValue("id")} />
         </DropdownMenuContent>
       </DropdownMenu>
     ),

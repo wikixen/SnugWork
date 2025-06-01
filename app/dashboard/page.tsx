@@ -6,8 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { JobApp } from "@/lib/data/models";
-import { db } from "@/server/db/db";
-import { jobs } from "@/server/db/schema";
 import {
   ActivityIcon,
   ClipboardList,
@@ -16,23 +14,19 @@ import {
 } from "lucide-react";
 import { ReactNode } from "react";
 import { DashPieChart } from "./_components/chart";
-import { DataTable } from "./_components/data-table";
-
+import { DataTable } from "./_components/DataTable/dataTable";
+import { getJobs } from "@/server/queries/getJobs";
 
 export default async function Page() {
-  const data = await db.query.jobs.findMany({
-      orderBy: [jobs.dateApplied],
-    }) as JobApp[];
-  
-  console.log(data)
+  const data = await getJobs();
+
   const currMonth = new Date().getMonth();
-  const totalApply = (data)
+  const totalApply = data
     .filter((x) => x.appStatus === "Applied")
     .reduce((acc, app) => {
       if (app.dateApplied.getMonth() === currMonth) acc++;
       return acc;
     }, 0);
-
 
   return (
     <section className="flex flex-col gap-8">
@@ -52,7 +46,7 @@ export default async function Page() {
           <CardHeader>
             <CardTitle>Recent Applications</CardTitle>
             <CardDescription>
-              {`You've applied to ${totalApply} jobs in the last month`}
+              {`You've applied to ${totalApply} job(s) in the last month`}
             </CardDescription>
           </CardHeader>
           <CardContent>

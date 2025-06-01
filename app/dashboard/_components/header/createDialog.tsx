@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Dialog,
   DialogContent,
@@ -30,38 +31,36 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { JobApp } from "@/lib/data/models";
 import { cn } from "@/lib/utils";
-import { formSchema } from "@/lib/zodSchema";
+import { createSchema } from "@/lib/zodSchemas/createSchema";
+import { createJob } from "@/server/queries/createJob";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SelectTrigger } from "@radix-ui/react-select";
 import { CalendarIcon, PlusIcon } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { createJob } from "../../../server/queries/createJob";
-import { useState } from "react";
-import { Calendar } from "@/components/ui/calendar";
 
 export default function CreateDialog() {
   const [open, setOpen] = useState(false);
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof createSchema>>({
     mode: "onBlur",
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(createSchema),
     defaultValues: {
       company: "",
       location: "",
       position: "",
       appStatus: "Applied",
-      userId: "A"
-    },
+      userId: "A",
+    }
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof createSchema>) => {
     createJob(values as JobApp);
     setOpen(false);
-    console.log(values);
   };
 
   return (

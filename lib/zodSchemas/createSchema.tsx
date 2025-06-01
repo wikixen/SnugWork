@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const formSchema = z.object({
+export const createSchema = z.object({
   company: z.string().min(1, {
     message: "Company can't be empty",
   }).max(255, {
@@ -21,5 +21,5 @@ export const formSchema = z.object({
     .max(new Date(Date.now()), {
       message: "Date applied can't be in the future",
     }),
-  userId: z.string()
+  userId: z.string(),
 });

@@ -7,7 +7,9 @@
 - [x] [Add auth(Clerk)](https://clerk.com/)
 - [x] Setup DB(Neon Postgres & DrizzleORM)
 - [x] Attach DB to UI
-- [ ] Add create & edit btns
+- [x] Create Btn
+- [x] Delete Btn
+- [x] Edit btn
 - [ ] Error management(Sentry?)
 - [ ] Routing
 - [ ] Ratelimiting(Upstash)
