@@ -1,0 +1,5 @@
+# ./lib/data
+Contains JobApp interface used throughout app.
+
+# ./lib/zodSchemas
+Contains the zodSchemas used in the create & edit dialog forms.

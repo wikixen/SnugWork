@@ -1,0 +1,5 @@
+# ./components
+Consists of ui components used in more than one page with the exception of date-picker.tsx & date-range-picker.tsx which were left in to not mess up shadcn components.
+
+# ./components/ui
+Shadcn components
