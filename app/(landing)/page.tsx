@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,8 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { SignedOut, SignUpButton } from "@clerk/nextjs";
+import { SignedOut, SignUpButton, useAuth } from "@clerk/nextjs";
 import { ArrowRight, Briefcase, TrendingUpIcon } from "lucide-react";
+import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 interface HomeCardProps {
@@ -18,6 +20,11 @@ interface HomeCardProps {
 }
 
 export default function Home() {
+  const { isSignedIn } = useAuth()
+  
+    if (isSignedIn) {
+      redirect("/dashboard")
+    }
   const HomeCards: HomeCardProps[] = [
     {
       id: 0,
