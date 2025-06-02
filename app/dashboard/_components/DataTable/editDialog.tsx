@@ -37,7 +37,7 @@ import {
 import { JobApp } from "@/lib/data/models";
 import { cn } from "@/lib/utils";
 import { editSchema } from "@/lib/zodSchemas/editSchema";
-import { editJob } from "@/server/queries/editJob";
+import { editJob } from "@/app/dashboard/_components/DataTable/editJob";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Row } from "@tanstack/react-table";
 import { CalendarIcon } from "lucide-react";
@@ -66,7 +66,6 @@ export default function EditDialog({ row }: EditDialogProps) {
   });
 
   const onSubmit = (values: z.infer<typeof editSchema>) => {
-    console.log(values);
     editJob(values as JobApp);
     setOpen(false);
   };

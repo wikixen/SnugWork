@@ -83,7 +83,7 @@ export function DashPieChart({ data }: { data: JobApp[] }) {
               nameKey="appStatus"
             />
             <ChartLegend
-              content={<ChartLegendContent nameKey="appStatus" />}
+              content={<ChartLegendContent key={0} nameKey="appStatus" />}
             />
           </PieChart>
         </ChartContainer>

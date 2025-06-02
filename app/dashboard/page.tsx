@@ -15,51 +15,87 @@ import {
 import { ReactNode } from "react";
 import { DashPieChart } from "./_components/chart";
 import { DataTable } from "./_components/DataTable/dataTable";
-import { getJobs } from "@/server/queries/getJobs";
+import { getJobs } from "@/app/dashboard/getJobs";
 
 export default async function Page() {
   const data = await getJobs();
 
-  const currMonth = new Date().getMonth();
-  const totalApply = data
-    .filter((x) => x.appStatus === "Applied")
-    .reduce((acc, app) => {
-      if (app.dateApplied.getMonth() === currMonth) acc++;
-      return acc;
-    }, 0);
-
-  return (
-    <section className="flex flex-col gap-8">
-      <section className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-semibold">Dashboard</h1>
-          <p className="text-gray-400">
-            Track your job applications and stay organized.
-          </p>
-        </div>
+  if (data) {
+    const currMonth = new Date().getMonth();
+    const totalApply = data
+      .filter((x) => x.appStatus === "Applied")
+      .reduce((acc, app) => {
+        if (app.dateApplied.getMonth()+1 === currMonth) acc++;
+        return acc;
+      }, 0);
+    
+  
+    return (
+      <section className="flex flex-col gap-8">
+        <section className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-semibold">Dashboard</h1>
+            <p className="text-gray-400">
+              Track your job applications and stay organized.
+            </p>
+          </div>
+        </section>
+        <section className="grid gap-4 lg:grid-cols-4">
+          <DashMiniCards data={data} />
+        </section>
+        <section className="grid gap-4 lg:grid-cols-[1fr_.5fr]">
+          <Card>
+            <CardHeader>
+              <CardTitle>Recent Applications</CardTitle>
+              <CardDescription>
+                {`You've applied to ${totalApply} job(s) in the last month`}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <DataTable data={data} />
+            </CardContent>
+          </Card>
+          <div className="grid gap-4">
+            <DashPieChart data={data} />
+            <InterviewCard data={data} />
+          </div>
+        </section>
       </section>
-      <section className="grid gap-4 lg:grid-cols-4">
-        <DashMiniCards data={data} />
+    );
+  } else {
+    return (
+      <section className="flex flex-col gap-8">
+        <section className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-semibold">Dashboard</h1>
+            <p className="text-gray-400">
+              Track your job applications and stay organized.
+            </p>
+          </div>
+        </section>
+        <section className="grid gap-4 lg:grid-cols-4">
+          <DashMiniCards data={[]} />
+        </section>
+        <section className="grid gap-4 lg:grid-cols-[1fr_.5fr]">
+          <Card>
+            <CardHeader>
+              <CardTitle>Recent Applications</CardTitle>
+              <CardDescription>
+                {`You've applied to 0 job(s) in the last month`}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <DataTable data={[]} />
+            </CardContent>
+          </Card>
+          <div className="grid gap-4">
+            <DashPieChart data={[]} />
+            <InterviewCard data={[]} />
+          </div>
+        </section>
       </section>
-      <section className="grid gap-4 lg:grid-cols-[1fr_.5fr]">
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Applications</CardTitle>
-            <CardDescription>
-              {`You've applied to ${totalApply} job(s) in the last month`}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <DataTable data={data} />
-          </CardContent>
-        </Card>
-        <div className="grid gap-4">
-          <DashPieChart data={data} />
-          <InterviewCard data={data} />
-        </div>
-      </section>
-    </section>
-  );
+    );
+  }
 }
 
 interface DashMiniCardType {

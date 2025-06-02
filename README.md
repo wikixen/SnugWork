@@ -10,6 +10,5 @@
 - [x] Create Btn
 - [x] Delete Btn
 - [x] Edit btn
-- [ ] Error management(Sentry?)
-- [ ] Routing
+- [x] Connect users to jobs
 - [ ] Ratelimiting(Upstash)

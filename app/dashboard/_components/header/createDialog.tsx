@@ -37,7 +37,7 @@ import {
 import { JobApp } from "@/lib/data/models";
 import { cn } from "@/lib/utils";
 import { createSchema } from "@/lib/zodSchemas/createSchema";
-import { createJob } from "@/server/queries/createJob";
+import { createJob } from "@/app/dashboard/_components/header/createJob";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
@@ -54,7 +54,7 @@ export default function CreateDialog() {
       location: "",
       position: "",
       appStatus: "Applied",
-      userId: "A",
+      userId: "",
     }
   });
 

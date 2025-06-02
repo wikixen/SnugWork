@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { deleteJob } from "@/server/queries/deleteJob";
+import { deleteJob } from "@/app/dashboard/_components/DataTable/deleteJob";
 
 interface DeleteDialogProps {
   row: number;
