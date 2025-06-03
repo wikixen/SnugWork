@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 
 export async function deleteJob(id: number) {
   const { userId } = await auth();
-  
+
   if (userId) {
     try {
       await db
@@ -17,7 +17,7 @@ export async function deleteJob(id: number) {
       console.error(e);
     }
   } else {
-    console.error("error deleting data")
+    console.error("error deleting data");
   }
 
   revalidatePath("/dashboard");

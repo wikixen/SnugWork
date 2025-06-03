@@ -55,7 +55,7 @@ export default function CreateDialog() {
       position: "",
       appStatus: "Applied",
       userId: "",
-    }
+    },
   });
 
   const onSubmit = (values: z.infer<typeof createSchema>) => {

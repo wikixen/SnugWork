@@ -7,12 +7,12 @@ import { revalidatePath } from "next/cache";
 
 export async function editJob(formData: JobApp) {
   const parse = editSchema.safeParse({ ...formData });
-  
+
   try {
     await db.update(jobs).set({
       ...parse.data,
       updatedAt: new Date(Date.now()),
-      createdAt: jobs.createdAt
+      createdAt: jobs.createdAt,
     });
   } catch (e) {
     console.error(e);

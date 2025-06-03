@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 export async function createJob(formData: JobApp) {
   const { userId } = await auth();
   const parse = createSchema.safeParse({ ...formData });
-  
+
   if (userId) {
     try {
       await db.insert(jobs).values({

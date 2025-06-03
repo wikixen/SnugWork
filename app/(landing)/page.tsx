@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,11 +20,11 @@ interface HomeCardProps {
 }
 
 export default function Home() {
-  const { isSignedIn } = useAuth()
-  
-    if (isSignedIn) {
-      redirect("/dashboard")
-    }
+  const { isSignedIn } = useAuth();
+
+  if (isSignedIn) {
+    redirect("/dashboard");
+  }
   const HomeCards: HomeCardProps[] = [
     {
       id: 0,

@@ -62,7 +62,7 @@ export default function EditDialog({ row }: EditDialogProps) {
       appStatus: row.getValue("appStatus"),
       dateApplied: row.getValue("dateApplied"),
       userId: row.getValue("userId"),
-    }
+    },
   });
 
   const onSubmit = (values: z.infer<typeof editSchema>) => {
