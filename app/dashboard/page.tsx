@@ -25,11 +25,10 @@ export default async function Page() {
     const totalApply = data
       .filter((x) => x.appStatus === "Applied")
       .reduce((acc, app) => {
-        if (app.dateApplied.getMonth()+1 === currMonth) acc++;
+        if (app.dateApplied.getMonth() + 1 === currMonth) acc++;
         return acc;
       }, 0);
-    
-  
+
     return (
       <section className="flex flex-col gap-8">
         <section className="flex justify-between items-center">
@@ -129,8 +128,10 @@ function DashMiniCards({ data }: { data: JobApp[] }) {
       key: 4,
       title: "Response Rate",
       icon: <ActivityIcon />,
-      total: (data.filter((x) => x.appStatus !== "Applied").length /
-        data.length),
+      total: data.filter((x) => x.appStatus !== "Applied").length > 0
+        ? (data.filter((x) => x.appStatus !== "Applied").length /
+          data.length)
+        : 0,
     },
   ];
   return (
@@ -163,17 +164,19 @@ function InterviewCard({ data }: { data: JobApp[] }) {
         <CardTitle>Upcoming Interviews</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
-        {interviews.map((item) => (
-          <Card key={item.id}>
-            <CardHeader>
-              <CardTitle>{item.company}</CardTitle>
-              <CardDescription>{item.position}</CardDescription>
-              <CardDescription className="text-xs">
-                Applied on {item.dateApplied.toLocaleDateString()}
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        ))}
+        {interviews.length > 0
+          ? interviews.map((item) => (
+            <Card key={item.id}>
+              <CardHeader>
+                <CardTitle>{item.company}</CardTitle>
+                <CardDescription>{item.position}</CardDescription>
+                <CardDescription className="text-xs">
+                  Applied on {item.dateApplied.toLocaleDateString()}
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          ))
+          : <p className="text-gray-400 text-sm">No upcoming interviews😔</p>}
       </CardContent>
     </Card>
   );
