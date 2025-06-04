@@ -56,10 +56,14 @@ export default function CreateDialog() {
       appStatus: "Applied",
       userId: "",
     },
+    resetOptions: {
+      keepDirty: false
+    }
   });
 
   const onSubmit = (values: z.infer<typeof createSchema>) => {
     createJob(values as JobApp);
+    form.reset()
     setOpen(false);
   };
 
