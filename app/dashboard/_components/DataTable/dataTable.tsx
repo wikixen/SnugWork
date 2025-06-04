@@ -67,10 +67,10 @@ const columns: ColumnDef<JobApp>[] = [
   },
   {
     accessorKey: "dateApplied",
-    header: "Applied",
+    header: "Applied On",
     cell: ({ row }) => (
       <div>
-        Applied on {(row.getValue("dateApplied") as Date)?.toLocaleDateString()}
+        {(row.getValue("dateApplied") as Date).toLocaleDateString('en-US', { timeZone: 'UTC' })}
       </div>
     ),
   },
