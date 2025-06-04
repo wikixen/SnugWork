@@ -11,14 +11,14 @@ export async function editJob(formData: JobApp) {
   const { userId } = await auth();
   const parse = editSchema.safeParse({ ...formData });
 
-  if (userId) {
+  if (userId && parse.data) {
     try {
       await db.update(jobs).set({
         ...parse.data,
         userId: userId,
         updatedAt: new Date(Date.now()),
         createdAt: jobs.createdAt,
-      }).where(eq(jobs.id, parse.data?.id!));
+      }).where(eq(jobs.id, parse.data.id));
     } catch (e) {
       console.error(e);
     }
