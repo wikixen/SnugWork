@@ -15,7 +15,7 @@ import {
 import { ReactNode } from "react";
 import { DashPieChart } from "./_components/chart";
 import { DataTable } from "./_components/DataTable/dataTable";
-import { getJobs } from "@/app/dashboard/getJobs";
+import { getJobs } from "@/server/queries/getJobs";
 
 export default async function Page() {
   const data = await getJobs();
