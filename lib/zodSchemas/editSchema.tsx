@@ -18,6 +18,7 @@ export const editSchema = z.object({
     message: "Position can't be longer than 255 characters",
   }),
   appStatus: z.enum(["Applied", "Interview", "Offer", "Rejected"]),
+  notes: z.string().max(255,{message:"Notes can't be longer than 255 characters"}),
   dateApplied: z.date()
     .max(new Date(Date.now()), {
       message: "Date applied can't be in the future",

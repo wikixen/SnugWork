@@ -37,7 +37,7 @@ import {
 import { JobApp } from "@/lib/data/models";
 import { cn } from "@/lib/utils";
 import { createSchema } from "@/lib/zodSchemas/createSchema";
-import { createJob } from "@/app/dashboard/_components/header/createJob";
+import { createJob } from "@/server/queries/createJob";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
@@ -54,6 +54,7 @@ export default function CreateDialog() {
       location: "",
       position: "",
       appStatus: "Applied",
+      notes: "",
       userId: "",
     },
     resetOptions: {
@@ -152,6 +153,22 @@ export default function CreateDialog() {
                   </Select>
                   <FormDescription>
                     If no status is chosen, Applied is automatically selected.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="notes"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Notes</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter any notable tidibits..." {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This field can be left empty if there are no notes to add.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

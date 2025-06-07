@@ -41,7 +41,7 @@ export default async function Page() {
       <section className="grid gap-4 lg:grid-cols-4">
         <DashMiniCards data={data ? data : []} />
       </section>
-      <section className="grid gap-4 lg:grid-cols-[1fr_.5fr]">
+      <section className="grid gap-4 2xl:grid-cols-[1fr_.5fr]">
         <Card>
           <CardHeader>
             <CardTitle>Recent Applications</CardTitle>

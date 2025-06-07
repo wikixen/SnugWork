@@ -27,6 +27,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { fill } from "../chartFill";
 
 const columns: ColumnDef<JobApp>[] = [
   {
@@ -63,7 +65,30 @@ const columns: ColumnDef<JobApp>[] = [
   {
     accessorKey: "appStatus",
     header: "Status",
-    cell: ({ row }) => <div>{row.getValue("appStatus")}</div>,
+    cell: ({ row }) => {
+      const status = row.getValue("appStatus");
+
+      switch (status) {
+        case "Applied":
+          return <div className="bg-[#4f46e5] rounded-xl text-center py-1 px-0.5">{status}</div>
+        case "Interview":
+          return <div className="bg-[#f59e0b] rounded-xl text-center py-1 px-0.5">{status}</div>
+        case "Offer":
+          return <div className="bg-[#10b981] rounded-xl text-center py-1 px-0.5">{status}</div>
+        case "Rejected":
+          return <div className="bg-[#ef4444] rounded-xl text-center py-1 px-0.5">{status}</div>
+      }
+    },
+  },
+  {
+    accessorKey: "notes",
+    header: "Notes",
+    cell: ({ row }) => (
+      <ScrollArea className="capitalize w-50 py-4">
+        {row.getValue("notes")}
+        <ScrollBar orientation="horizontal" className="border" />
+      </ScrollArea>
+    ),
   },
   {
     accessorKey: "dateApplied",
@@ -106,7 +131,7 @@ export function DataTable({ data }: { data: JobApp[] }) {
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
       pagination: {
-        pageSize: 25,
+        pageSize: 20,
       },
     },
   });
