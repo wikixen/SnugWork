@@ -8,10 +8,10 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function editJob(formData: JobApp) {
+  const { userId } = await auth();
+  const parse = editSchema.safeParse({ ...formData });
+  
   try {
-    const { userId } = await auth();
-    const parse = editSchema.safeParse({ ...formData });
-
     if (!userId) {
       console.error("error retrieving user data");
       throw new Error("User not found")

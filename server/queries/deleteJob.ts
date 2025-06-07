@@ -6,9 +6,9 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function deleteJob(id: number) {
+  const { userId } = await auth();
+  
   try {
-    const { userId } = await auth();
-
     if (!userId) {
       console.error("error retrieving user data");
       throw new Error("User not found");

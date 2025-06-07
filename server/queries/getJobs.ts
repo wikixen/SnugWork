@@ -6,9 +6,9 @@ import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 
 export async function getJobs() {
-  try {
-    const { userId } = await auth();
+  const { userId } = await auth();
 
+  try {
     if (!userId ) {
       console.error("error retrieving user data");
       throw new Error("User not found")

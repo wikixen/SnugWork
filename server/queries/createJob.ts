@@ -7,10 +7,10 @@ import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 export async function createJob(formData: JobApp) {
+  const { userId } = await auth();
+  const parse = createSchema.safeParse({ ...formData });
+  
   try {
-    const { userId } = await auth();
-    const parse = createSchema.safeParse({ ...formData });
-
     if (!userId) {
       console.error("error retrieving user data");
       throw new Error("User not found")
