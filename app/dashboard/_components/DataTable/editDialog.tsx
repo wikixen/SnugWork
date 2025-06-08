@@ -60,7 +60,7 @@ export default function EditDialog({ row }: EditDialogProps) {
       location: row.getValue("location"),
       position: row.getValue("position"),
       appStatus: row.getValue("appStatus"),
-      notes: row.getValue("notes"),
+      notes: row.getValue("notes") ? row.getValue("notes") : "",
       dateApplied: row.getValue("dateApplied"),
       userId: row.getValue("userId"),
     },
