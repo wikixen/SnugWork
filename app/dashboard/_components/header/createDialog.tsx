@@ -37,11 +37,12 @@ import {
 import { JobApp } from "@/lib/data/models";
 import { cn } from "@/lib/utils";
 import { createSchema } from "@/lib/zodSchemas/createSchema";
-import { createJob } from "@/app/dashboard/_components/header/createJob";
+import { createJob } from "@/server/queries/createJob";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 export default function CreateDialog() {
@@ -54,6 +55,7 @@ export default function CreateDialog() {
       location: "",
       position: "",
       appStatus: "Applied",
+      notes: "",
       userId: "",
     },
     resetOptions: {
@@ -63,7 +65,10 @@ export default function CreateDialog() {
 
   const onSubmit = (values: z.infer<typeof createSchema>) => {
     createJob(values as JobApp);
-    form.reset()
+    toast("Job Application has been added", {
+      description: `Your application to ${values.company} for the ${values.position} position has been added`,
+    })
+    form.reset();
     setOpen(false);
   };
 
@@ -152,6 +157,22 @@ export default function CreateDialog() {
                   </Select>
                   <FormDescription>
                     If no status is chosen, Applied is automatically selected.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="notes"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Notes</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter any notable tidibits..." {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    {`Notes can be left empty if there's nothing to add.`}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

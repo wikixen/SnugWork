@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { deleteJob } from "@/app/dashboard/_components/DataTable/deleteJob";
+import { deleteJob } from "@/server/queries/deleteJob";
+import { toast } from "sonner";
 
 interface DeleteDialogProps {
   row: number;
@@ -42,7 +43,12 @@ export default function DeleteDialog({ row }: DeleteDialogProps) {
           <AlertDialogAction asChild>
             <Button
               variant="destructive"
-              onClick={() => deleteJob(row)}
+              onClick={() => {
+                deleteJob(row)
+                toast("Job Application has been deleted", {
+                  description: `The selected application has been deleted`,
+                })
+              }}
               className="text-white cursor-pointer"
             >
               Delete

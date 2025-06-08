@@ -7,17 +7,19 @@ import { revalidatePath } from "next/cache";
 
 export async function deleteJob(id: number) {
   const { userId } = await auth();
-
-  if (userId) {
-    try {
-      await db
-        .delete(jobs)
-        .where(eq(jobs.id, id));
-    } catch (e) {
-      console.error(e);
+  
+  try {
+    if (!userId) {
+      console.error("error retrieving user data");
+      throw new Error("User not found");
     }
-  } else {
-    console.error("error deleting data");
+
+    await db
+      .delete(jobs)
+      .where(eq(jobs.id, id));
+  } catch (err: any) {
+    console.error(err);
+    throw Error("Error creating job: ", err);
   }
 
   revalidatePath("/dashboard");

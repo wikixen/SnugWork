@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -10,95 +11,19 @@ import {
 } from "@/components/ui/table";
 import { JobApp } from "@/lib/data/models";
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
-  useReactTable,
+  getSortedRowModel,
+  SortingState,
+  useReactTable
 } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-import DeleteDialog from "./deleteDialog";
-import EditDialog from "./editDialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-
-const columns: ColumnDef<JobApp>[] = [
-  {
-    accessorKey: "id",
-    header: "",
-    cell: () => <></>,
-  },
-  {
-    accessorKey: "userId",
-    header: "",
-    cell: () => <></>,
-  },
-  {
-    accessorKey: "company",
-    header: "Company",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("company")}</div>
-    ),
-  },
-  {
-    accessorKey: "position",
-    header: "Postion",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("position")}</div>
-    ),
-  },
-  {
-    accessorKey: "location",
-    header: "Location",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("location")}</div>
-    ),
-  },
-  {
-    accessorKey: "appStatus",
-    header: "Status",
-    cell: ({ row }) => <div>{row.getValue("appStatus")}</div>,
-  },
-  {
-    accessorKey: "dateApplied",
-    header: "Applied On",
-    cell: ({ row }) => (
-      <div>
-        {(row.getValue("dateApplied") as Date).toLocaleDateString('en-US', { timeZone: 'UTC' })}
-      </div>
-    ),
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => (
-      <DropdownMenu modal={false}>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0 cursor-pointer">
-            <span className="sr-only">Open menu</span>
-            <MoreHorizontal />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel className="font-semibold">
-            Actions
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <EditDialog row={row} />
-          <DeleteDialog row={row.getValue("id")} />
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
-  },
-];
+import { useState } from "react";
+import { columns } from "./columnDef";
 
 export function DataTable({ data }: { data: JobApp[] }) {
+  const [sorting, setSorting] = useState<SortingState>([])
+
   const table = useReactTable({
     data,
     columns,
@@ -106,9 +31,14 @@ export function DataTable({ data }: { data: JobApp[] }) {
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
       pagination: {
-        pageSize: 25,
+        pageSize: 20,
       },
     },
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting
+    }
   });
 
   return (
@@ -119,7 +49,7 @@ export function DataTable({ data }: { data: JobApp[] }) {
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id} className="font-bold">
+                  <TableHead key={header.id}>
                     {header.isPlaceholder ? null : flexRender(
                       header.column.columnDef.header,
                       header.getContext(),

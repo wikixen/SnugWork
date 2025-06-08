@@ -5,5 +5,6 @@ export interface JobApp {
   location: string;
   position: string;
   appStatus: "Applied" | "Interview" | "Offer" | "Rejected";
+  notes: string;
   dateApplied: Date;
 }

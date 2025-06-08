@@ -37,7 +37,7 @@ import {
 import { JobApp } from "@/lib/data/models";
 import { cn } from "@/lib/utils";
 import { editSchema } from "@/lib/zodSchemas/editSchema";
-import { editJob } from "@/app/dashboard/_components/DataTable/editJob";
+import { editJob } from "@/server/queries/editJob";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Row } from "@tanstack/react-table";
 import { CalendarIcon } from "lucide-react";
@@ -60,6 +60,7 @@ export default function EditDialog({ row }: EditDialogProps) {
       location: row.getValue("location"),
       position: row.getValue("position"),
       appStatus: row.getValue("appStatus"),
+      notes: row.getValue("notes"),
       dateApplied: row.getValue("dateApplied"),
       userId: row.getValue("userId"),
     },
@@ -155,6 +156,19 @@ export default function EditDialog({ row }: EditDialogProps) {
                       </SelectGroup>
                     </SelectContent>
                   </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="notes"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Notes</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

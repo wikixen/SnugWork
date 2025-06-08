@@ -3,6 +3,7 @@ import {
   pgEnum,
   pgTable,
   serial,
+  text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -23,6 +24,7 @@ export const jobs = pgTable("jobs", {
   appStatus: statusEnum()
     .notNull()
     .default("Applied"),
+  notes: text("notes"),
   dateApplied: date("dateApplied", { mode: "date" }) // Might change this to a date string
     .notNull()
     .defaultNow(),
