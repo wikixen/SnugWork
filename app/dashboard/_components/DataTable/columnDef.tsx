@@ -52,7 +52,7 @@ export const columns: ColumnDef<JobApp>[] = [
   },
   {
     accessorKey: "notes",
-    header: "Notes",
+    header: () => (<div className="font-bold">Notes</div>),
     cell: ({ row }) => (
       <ScrollArea className="capitalize w-50 py-4">
         {row.getValue("notes")}
