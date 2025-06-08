@@ -1,22 +1,22 @@
-import { Button } from "@/components/ui/button"
-import { JobApp } from "@/lib/data/models"
-import { Column } from "@tanstack/react-table"
-import { ArrowDownIcon, ArrowUpDown, ArrowUpIcon } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { JobApp } from "@/lib/data/models";
+import { Column } from "@tanstack/react-table";
+import { ArrowDownIcon, ArrowUpDown, ArrowUpIcon } from "lucide-react";
 
 interface SortHeaderProps {
-  column: Column<JobApp, unknown>,
-  children: string
+  column: Column<JobApp, unknown>;
+  children: string;
 }
 
 export const SortHeader = ({ column, children }: SortHeaderProps) => {
   const sortIcon = () => {
     const sort = column.getIsSorted();
     if (!sort) {
-      return <ArrowUpDown />
+      return <ArrowUpDown />;
     }
 
-    return sort === "desc" ? <ArrowDownIcon /> : <ArrowUpIcon />
-  }
+    return sort === "desc" ? <ArrowDownIcon /> : <ArrowUpIcon />;
+  };
   return (
     <Button
       variant="ghost"
@@ -26,5 +26,5 @@ export const SortHeader = ({ column, children }: SortHeaderProps) => {
       {children}
       {sortIcon()}
     </Button>
-  )
-}
+  );
+};

@@ -9,17 +9,17 @@ import { revalidatePath } from "next/cache";
 export async function createJob(formData: JobApp) {
   const { userId } = await auth();
   const parse = createSchema.safeParse({ ...formData });
-  
+
   try {
     if (!userId) {
       console.error("error retrieving user data");
-      throw new Error("User not found")
+      throw new Error("User not found");
     }
     if (!parse.data) {
-      console.error("error retrieving data")
-      throw Error("Error retrieving data")
+      console.error("error retrieving data");
+      throw Error("Error retrieving data");
     }
-    
+
     await db.insert(jobs).values({
       ...parse.data as JobApp,
       userId: userId,
@@ -27,7 +27,7 @@ export async function createJob(formData: JobApp) {
     });
   } catch (err: any) {
     console.error(err);
-    throw Error("Error creating job: ", err)
+    throw Error("Error creating job: ", err);
   }
 
   revalidatePath("/dashboard");

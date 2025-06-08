@@ -59,15 +59,16 @@ export default function CreateDialog() {
       userId: "",
     },
     resetOptions: {
-      keepDirty: false
-    }
+      keepDirty: false,
+    },
   });
 
   const onSubmit = (values: z.infer<typeof createSchema>) => {
     createJob(values as JobApp);
     toast("Job Application has been added", {
-      description: `Your application to ${values.company} for the ${values.position} position has been added`,
-    })
+      description:
+        `Your application to ${values.company} for the ${values.position} position has been added`,
+    });
     form.reset();
     setOpen(false);
   };
@@ -169,7 +170,10 @@ export default function CreateDialog() {
                 <FormItem>
                   <FormLabel>Notes</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter any notable tidibits..." {...field} />
+                    <Input
+                      placeholder="Enter any notable tidibits..."
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>
                     {`Notes can be left empty if there's nothing to add.`}
@@ -207,7 +211,8 @@ export default function CreateDialog() {
                         selected={field.value}
                         onSelect={field.onChange}
                         disabled={(date: Date) =>
-                          date > new Date(Date.now()) || date < new Date("1900-01-01")}
+                          date > new Date(Date.now()) ||
+                          date < new Date("1900-01-01")}
                       />
                     </PopoverContent>
                   </Popover>
