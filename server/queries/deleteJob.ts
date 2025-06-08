@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 
 export async function deleteJob(id: number) {
   const { userId } = await auth();
-  
+
   try {
     if (!userId) {
       console.error("error retrieving user data");

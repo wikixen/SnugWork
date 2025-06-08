@@ -36,7 +36,7 @@ export default function DashboardLayout({
           <div className="py-4">
             {children}
           </div>
-          <Toaster/>
+          <Toaster />
           <Footer />
         </body>
       </html>

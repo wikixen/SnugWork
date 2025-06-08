@@ -9,17 +9,17 @@ export async function getJobs() {
   const { userId } = await auth();
 
   try {
-    if (!userId ) {
+    if (!userId) {
       console.error("error retrieving user data");
-      throw new Error("User not found")
+      throw new Error("User not found");
     }
 
     return await db.query.jobs.findMany({
-      orderBy: [jobs.updatedAt,jobs.createdAt],
+      orderBy: [jobs.updatedAt, jobs.createdAt],
       where: (eq(jobs.userId, userId)),
     }) as JobApp[];
   } catch (err: any) {
     console.error(err);
-    throw new Error("Error fetching data: ", err)
+    throw new Error("Error fetching data: ", err);
   }
 }

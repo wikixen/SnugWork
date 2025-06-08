@@ -44,10 +44,10 @@ export default function DeleteDialog({ row }: DeleteDialogProps) {
             <Button
               variant="destructive"
               onClick={() => {
-                deleteJob(row)
+                deleteJob(row);
                 toast("Job Application has been deleted", {
                   description: `The selected application has been deleted`,
-                })
+                });
               }}
               className="text-white cursor-pointer"
             >
