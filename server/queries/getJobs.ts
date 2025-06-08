@@ -15,7 +15,7 @@ export async function getJobs() {
     }
 
     return await db.query.jobs.findMany({
-      orderBy: [jobs.dateApplied],
+      orderBy: [jobs.updatedAt,jobs.createdAt],
       where: (eq(jobs.userId, userId)),
     }) as JobApp[];
   } catch (err: any) {

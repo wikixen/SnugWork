@@ -19,14 +19,6 @@ import { getJobs } from "@/server/queries/getJobs";
 
 export default async function Page() {
   const data = await getJobs();
-  const currMonth = new Date().getMonth();
-
-  const totalApply = data ? data
-    .filter((x) => x.appStatus === "Applied")
-    .reduce((acc, app) => {
-      if (app.dateApplied.getMonth() + 1 === currMonth) acc++;
-      return acc;
-    }, 0) : 0;
 
   return (
     <section className="flex flex-col gap-8">
@@ -46,7 +38,7 @@ export default async function Page() {
           <CardHeader>
             <CardTitle>Recent Applications</CardTitle>
             <CardDescription>
-              {`You've applied to ${totalApply} job(s) in the last month`}
+              A list of your recent applications
             </CardDescription>
           </CardHeader>
           <CardContent>
