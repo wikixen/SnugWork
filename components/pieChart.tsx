@@ -11,9 +11,15 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Pie, PieChart } from "recharts";
-import { fill } from "./chartFill";
 import { JobApp } from "@/lib/data/models";
 import { string } from "zod";
+
+const fill = {
+  Applied: "#4f46e5",
+  Interview: "#f59e0b",
+  Offer: "#10b981",
+  Rejected: "#ef4444",
+};
 
 const chartConfig = {
   count: {

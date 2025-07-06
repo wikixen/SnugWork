@@ -1,16 +1,9 @@
+import CreateDialog from "@/components/header/createDialog";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { MenuIcon } from "lucide-react";
 import Image from "next/image";
-import CreateDialog from "./createDialog";
 
 export default async function Header() {
   return (
@@ -27,20 +20,29 @@ export default async function Header() {
           SnugWork
         </span>
       </section>
-      <div className="not-sm:hidden flex gap-2">
-        <CreateDialog />
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </div>
-      <div className="sm:hidden flex items-center gap-2">
-        <MiniMenu />
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </div>
+      <SignedOut>
+        <SignInButton forceRedirectUrl={"/dashboard"}>
+          <Button className="cursor-pointer">
+            Log In
+          </Button>
+        </SignInButton>
+      </SignedOut>
+      <SignedIn>
+        <div className="not-sm:hidden flex gap-2">
+          <CreateDialog />
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
+        <div className="sm:hidden flex items-center gap-2">
+          <MiniMenu />
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
+      </SignedIn>
     </header>
-  );
+  )
 }
 
 // MiniMenu is only shown on small screens & contains the add & log out btns
