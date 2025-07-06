@@ -30,15 +30,11 @@ export default async function Header() {
       <SignedIn>
         <div className="not-sm:hidden flex gap-2">
           <CreateDialog />
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          <UserButton />
         </div>
         <div className="sm:hidden flex items-center gap-2">
           <MiniMenu />
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          <UserButton />
         </div>
       </SignedIn>
     </header>
