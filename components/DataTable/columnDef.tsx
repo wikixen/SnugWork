@@ -7,12 +7,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { SortHeader } from "./tableHeader";
 import { ColumnDef } from "@tanstack/react-table";
 import { JobApp } from "@/lib/data/models";
 import { MoreHorizontal } from "lucide-react";
 import DeleteDialog from "./deleteDialog";
 import EditDialog from "./editDialog";
+import { SortHeader } from "./tableHeader";
 
 // This is to define the columns in the data table
 export const columns: ColumnDef<JobApp>[] = [

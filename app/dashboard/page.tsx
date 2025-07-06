@@ -1,11 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import CardTemplate from "@/components/card";
 import { JobApp } from "@/lib/data/models";
+import { getJobs } from "@/server/queries/getJobs";
 import {
   ActivityIcon,
   ClipboardList,
@@ -13,9 +8,8 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { ReactNode } from "react";
-import { DashPieChart } from "./_components/chart";
-import { DataTable } from "./_components/DataTable/dataTable";
-import { getJobs } from "@/server/queries/getJobs";
+import { DataTable } from "../../components/DataTable/dataTable";
+import { DashPieChart } from "../../components/pieChart";
 
 export default async function Page() {
   const data = await getJobs();
@@ -34,17 +28,12 @@ export default async function Page() {
         <DashMiniCards data={data ? data : []} />
       </section>
       <section className="grid gap-4 2xl:grid-cols-[1fr_.5fr]">
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Applications</CardTitle>
-            <CardDescription>
-              A list of your recent applications
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <DataTable data={data ? data : []} />
-          </CardContent>
-        </Card>
+        <CardTemplate
+          title="Recent Applications"
+          desc="A list of your recent applications"
+        >
+          <DataTable data={data ? data : []} />
+        </CardTemplate>
         <div className="grid gap-4">
           <DashPieChart data={data ? data : []} />
           <InterviewCard data={data ? data : []} />
@@ -94,19 +83,13 @@ function DashMiniCards({ data }: { data: JobApp[] }) {
   return (
     <>
       {MiniCardArr.map((card) => (
-        <Card className="flex flex-col gap-4" key={card.key}>
-          <CardHeader className="flex justify-between">
-            <CardTitle>{card.title}</CardTitle>
-            {card.icon}
-          </CardHeader>
+        <CardTemplate title={card.title} key={card.key}>
           <div className="flex flex-col gap-1">
-            <CardContent className="text-xl">
-              {card.total >= 1
-                ? card.total
-                : `${(card.total * 100).toFixed(1)}%`}
-            </CardContent>
+            {card.total >= 1
+              ? card.total
+              : `${(card.total * 100).toFixed(1)}%`}
           </div>
-        </Card>
+        </CardTemplate>
       ))}
     </>
   );
@@ -116,25 +99,14 @@ function InterviewCard({ data }: { data: JobApp[] }) {
   const interviews = data.filter((x) => x.appStatus === "Interview")
     .slice(0, 5);
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Upcoming Interviews</CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-2">
-        {interviews.length > 0
-          ? interviews.map((item) => (
-            <Card key={item.id}>
-              <CardHeader>
-                <CardTitle>{item.company}</CardTitle>
-                <CardDescription>{item.position}</CardDescription>
-                <CardDescription className="text-xs">
-                  Applied on {item.dateApplied.toLocaleDateString()}
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          ))
-          : <p className="text-gray-400 text-sm">No upcoming interviews😔</p>}
-      </CardContent>
-    </Card>
+    <CardTemplate title="Upcoming Interviews">
+      {interviews.length > 0
+        ? interviews.map((item) => (
+          <CardTemplate key={item.id} title={item.company} desc={item.position}>
+            Applied on {item.dateApplied.toLocaleDateString()}
+          </CardTemplate>
+        ))
+        : <p className="text-gray-400 text-sm">No upcoming interviews😔</p>}
+    </CardTemplate>
   );
 }

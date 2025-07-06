@@ -3,13 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogFooter
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -44,6 +38,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import DialogTemplate from "../dialog";
 
 export default function CreateDialog() {
   const [open, setOpen] = useState(false);
@@ -74,20 +69,18 @@ export default function CreateDialog() {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="cursor-pointer">
-          <PlusIcon />
-          <span>Add Job</span>
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>New Job Application</DialogTitle>
-          <DialogDescription>
-            {`Add a job that you've applied to below`}
-          </DialogDescription>
-        </DialogHeader>
+      <DialogTemplate
+        trigger={
+          <Button className="cursor-pointer">
+            <PlusIcon />
+            <span>Add Job</span>
+          </Button>
+        }
+        title={"New Job Application"}
+      desc={"Add a job that you've applied to below"}
+      open={open}
+      setOpen={setOpen}
+      >
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-2"
@@ -225,7 +218,7 @@ export default function CreateDialog() {
             <Button type="submit">Save</Button>
           </DialogFooter>
         </form>
-      </DialogContent>
-    </Dialog>
+    </DialogTemplate>
   );
 }
+
